@@ -8,10 +8,26 @@
   </head>
   <body>
     <header>
-      <h1>TypeScript basics</h1>
+      <h1 id="logo">TypeScript basics</h1>
     </header>
     <main>
-      
+      <section id="addedCourseSection">
+        <h1>Tillagda kurser: </h1>
+        <table></table>
+      </section>
+
+      <form>
+        <label for="courseCode">Kurskod: </label>
+        <input type="text" id="courseCode">
+        <label for="courseName">Kursnamn: </label>
+        <input type="text" id="courseName">
+        <label for="progression">Progression: </label>
+        <input type="text" id="progression">
+        <label for="syllabus">Länk till kursplan:</label>
+        <input type="text" id="syllabus">
+        <input type="submit" value="Lägg till kurs" id="submitBtn">
+      </form>
+
     </main>
     
     <script type="module" src="/src/main.ts"></script>

@@ -31,7 +31,7 @@ body {
     
 }
 
-h1 {
+#logo {
     font-family: $font-headings;
     @extend %text-shadow;
     color: $textColorHeader;
@@ -43,3 +43,6 @@ header {
     justify-items: center;
 }
 
+h1:not(#logo) {
+    font-size: 1.5rem;
+}
