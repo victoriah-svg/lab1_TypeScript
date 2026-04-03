@@ -22,9 +22,16 @@ const linkInput = document.getElementById("syllabus") as HTMLInputElement;
 //Händelselyssnare på klick på sumbit formulär
 form.addEventListener("submit", (event: SubmitEvent) => {
     event.preventDefault();
-    console.log("Du klickade");
+   
 
 //lägg till validering för ifyllnad och generera felmeddelanden om ngt saknas
+   /* if(codeInput.value ==""){
+        console.log("Du måste fylla i korrekt kod")
+        return;
+    } 
+        localStorage.setItem("code", codeInput.value);
+       // console.log(localStorage.getItem("code"));
+*/
     
 
 //Ett objekt för ifylld kurs
@@ -34,6 +41,6 @@ const newCourse: courses = {
     progression: progInput.value,
     syllabus: linkInput.value,
 }
-console.log(newCourse);
+
     
 });
