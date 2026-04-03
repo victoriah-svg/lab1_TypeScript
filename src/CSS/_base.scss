@@ -1,0 +1,45 @@
+/*Color functions*/
+@use "sass:color";
+$bgColorHeader: #7077A1;
+$textColorHeader : rgb(9, 10, 10) ;
+
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Fjalla+One&display=swap');
+
+$font-stack: "Roboto", Arial, Helvetica, sans-serif;
+$font-headings: "Fjalla One", Impact, Arial, sans-serif;
+
+%text-shadow {
+    text-shadow: 0px 4px 10px rgba(26, 25, 25, 0.3);
+}
+
+html {
+    font-size: 100%;
+    height: 100vh;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    font-family: $font-stack;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    font-size: 1.2rem;
+    
+}
+
+h1 {
+    font-family: $font-headings;
+    @extend %text-shadow;
+    color: $textColorHeader;
+}
+
+header {
+    background-color: $bgColorHeader;
+    display: grid;
+    justify-items: center;
+}
+
