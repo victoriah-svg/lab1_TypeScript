@@ -36,7 +36,7 @@ form.addEventListener("submit", (event: SubmitEvent) => {
         errors.push("Du måste fylla i ett kursnamn");
     }
 
-    if(progInput.value ==""){
+    if(progInput.value =="" || (progInput.value !=="A" && progInput.value !=="B" && progInput.value !=="C")){
         errors.push("Du måste fylla i A, B eller C som kursprogression");
     }
 
