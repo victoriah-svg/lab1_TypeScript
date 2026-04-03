@@ -3,12 +3,14 @@
 #mainStart {
     display: grid;
     justify-items: center;
+    row-gap: 30px;
 }
 
 #printedCourseSection{
     align-self: center;
     display: grid;
     justify-items: center;
+    width: 90%;
 }
 
 #addNewCourseSection{
@@ -48,4 +50,35 @@ input:not(#submitBtn){
 #submitBtn:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+/*--Mobil-läge--*/
+@media screen and (max-width: 600px) {
+    body{
+        font-size: 0.9rem;
+    }
+
+    h1:not(#logo){
+        font-size: 1rem;
+    }
+
+    h2{
+        font-size: 0.9rem;
+    }
+
+    form{
+        width: 100%;
+        padding: 0;
+        
+    }
+
+    table{
+         padding: 0;
+        width: 100%;
+        font-size: 12px;
+    }
+
+    #printedCourseSection{
+        width: 100%;
+    }
 }
