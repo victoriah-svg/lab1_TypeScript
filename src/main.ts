@@ -18,18 +18,33 @@ const nameInput = document.getElementById("courseName") as HTMLInputElement;
 const progInput = document.getElementById("progression") as HTMLInputElement;
 //Syllabus Input
 const linkInput = document.getElementById("syllabus") as HTMLInputElement;
+//Array för felmeddelanden
+let errors: string [];
 
 //Händelselyssnare på klick på sumbit formulär
 form.addEventListener("submit", (event: SubmitEvent) => {
     event.preventDefault();
    
+    errors = [];
 
 //lägg till validering för ifyllnad och generera felmeddelanden om ngt saknas
-   /* if(codeInput.value ==""){
-        console.log("Du måste fylla i korrekt kod")
-        return;
+    if(codeInput.value ==""){
+        errors.push("Du måste fylla i korrekt kod");    
     } 
-        localStorage.setItem("code", codeInput.value);
+
+    if(nameInput.value ==""){
+        errors.push("Du måste fylla i ett kursnamn");
+    }
+
+    if(progInput.value ==""){
+        errors.push("Du måste fylla i A, B eller C som kursprogression");
+    }
+
+    if(linkInput.value ==""){
+        errors.push("Du måste ange länk till kursplan");
+    }
+    console.log(errors);
+       /* localStorage.setItem("code", codeInput.value);
        // console.log(localStorage.getItem("code"));
 */
     
