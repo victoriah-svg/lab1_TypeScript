@@ -7,6 +7,8 @@
 
 #printedCourseSection{
     align-self: center;
+    display: grid;
+    justify-items: center;
 }
 
 #addNewCourseSection{
@@ -23,7 +25,14 @@
 form {
     display: grid;
     gap: 10px;
-   
+    width: 90%;
+   justify-items: center;
+}
+
+input:not(#submitBtn){
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
 }
 
 #submitBtn {
@@ -33,6 +42,7 @@ form {
     padding: 10px;
     background-color: #D4EBF8;
     border-radius: 5px;
+    width: 50%;
 }
 
 #submitBtn:hover {
