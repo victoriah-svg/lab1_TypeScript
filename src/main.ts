@@ -18,6 +18,8 @@ const nameInput = document.getElementById("courseName") as HTMLInputElement;
 const progInput = document.getElementById("progression") as HTMLInputElement;
 //Syllabus Input
 const linkInput = document.getElementById("syllabus") as HTMLInputElement;
+//Div för felmeddelanden
+const errorDiv = document.getElementById("error") as HTMLDivElement;
 //Array för felmeddelanden
 let errors: string [];
 
@@ -26,6 +28,8 @@ form.addEventListener("submit", (event: SubmitEvent) => {
     event.preventDefault();
    
     errors = [];
+    //tömmer div för felmeddelanden mellan varje klick
+    errorDiv.innerHTML ="";
 
 //lägg till validering för ifyllnad och generera felmeddelanden om ngt saknas
     if(codeInput.value ==""){
@@ -43,6 +47,14 @@ form.addEventListener("submit", (event: SubmitEvent) => {
     if(linkInput.value ==""){
         errors.push("Du måste ange länk till kursplan");
     }
+
+    /* Loopar igenom array för felmeddelanden och skriver ut i DOM */
+    errors.forEach(error =>{
+        errorDiv.innerHTML += `
+    <p>${error}</p>`;
+    })
+    
+
     console.log(errors);
        /* localStorage.setItem("code", codeInput.value);
        // console.log(localStorage.getItem("code"));
