@@ -1,8 +1,10 @@
 /*Color functions*/
 @use "sass:color";
+$bgColor: #FCF8F3;
 $bgColorHeader: #7077A1;
 $textColorHeader : rgb(9, 10, 10) ;
 $tableBgColor: #456268;
+$bgColorComplementHeader: color.scale($bgColorHeader, $lightness: -30% ); 
 
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Fjalla+One&display=swap');
@@ -29,7 +31,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     font-size: 1.2rem;
-    
+    background-color: $bgColor;
 }
 
 #logo {

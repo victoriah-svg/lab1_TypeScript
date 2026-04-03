@@ -1,38 +1,40 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/CSS/main.scss">
-    <title>lab1-typescript</title>
-  </head>
-  <body>
-    <header>
-      <h1 id="logo">TypeScript basics</h1>
-    </header>
-    <main>
-      <section id="addedCourseSection">
-        <h1>Tillagda kurser: </h1>
-        <table>
-          <thead>
-                    <tr>
-                        <th>Kurskod</th>
-                        <th>Kursnamn</th>
-                        <th>Kursplan</th>
-                        <th>Progression</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-        </table>
-      </section>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/CSS/main.scss">
+  <title>lab1-typescript</title>
+</head>
+
+<body>
+  <header>
+    <h1 id="logo">TypeScript basics</h1>
+  </header>
+  <main id="mainStart">
+    <section id="printedCourseSection">
+      <h1>Tillagda kurser: </h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Kurskod</th>
+            <th>Kursnamn</th>
+            <th>Kursplan</th>
+            <th>Progression</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section id="addNewCourseSection">
       <h2>Lägg till ny kurs:</h2>
       <form>
         <label for="courseCode">Kurskod: </label>
@@ -45,9 +47,11 @@
         <input type="text" id="syllabus">
         <input type="submit" value="Lägg till kurs" id="submitBtn">
       </form>
+    </section>
 
-    </main>
-    
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
