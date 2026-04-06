@@ -1,6 +1,6 @@
 "use strict";
 
-interface courses {
+interface course {
     code: string;
     name: string;
     progression: string;
@@ -21,53 +21,65 @@ const linkInput = document.getElementById("syllabus") as HTMLInputElement;
 //Div för felmeddelanden
 const errorDiv = document.getElementById("error") as HTMLDivElement;
 //Array för felmeddelanden
-let errors: string [];
+let errors: string[];
+//Array för kurser för localStorage
+let courseArr: object[];
 
 //Händelselyssnare på klick på sumbit formulär
 form.addEventListener("submit", (event: SubmitEvent) => {
     event.preventDefault();
-   
+
     errors = [];
     //tömmer div för felmeddelanden mellan varje klick
-    errorDiv.innerHTML ="";
+    errorDiv.innerHTML = "";
 
-//lägg till validering för ifyllnad och generera felmeddelanden om ngt saknas
-    if(codeInput.value ==""){
-        errors.push("Du måste fylla i korrekt kod");    
-    } 
+    //Validering för ifyllnad som genererar felmeddelanden om ngt saknas
+    if (codeInput.value == "") {
+        errors.push("Du måste fylla i korrekt kod");
+    }
 
-    if(nameInput.value ==""){
+    if (nameInput.value == "") {
         errors.push("Du måste fylla i ett kursnamn");
     }
 
-    if(progInput.value =="" || (progInput.value !=="A" && progInput.value !=="B" && progInput.value !=="C")){
+    //Validerar att progression är A, B eller C
+    if (progInput.value == "" || (progInput.value !== "A" && progInput.value !== "B" && progInput.value !== "C")) {
         errors.push("Du måste fylla i A, B eller C som kursprogression");
     }
 
-    if(linkInput.value ==""){
+    if (linkInput.value == "") {
         errors.push("Du måste ange länk till kursplan");
     }
 
+    else {//Ett objekt för ifylld kurs
+        const newCourse: course = {
+            code: codeInput.value,
+            name: nameInput.value,
+            progression: progInput.value,
+            syllabus: linkInput.value,
+        }
+        printCourses(newCourse);
+    }
+
     /* Loopar igenom array för felmeddelanden och skriver ut i DOM */
-    errors.forEach(error =>{
+    errors.forEach(error => {
         errorDiv.innerHTML += `
     <p>${error}</p>`;
     })
-    
 
-    console.log(errors);
-       /* localStorage.setItem("code", codeInput.value);
-       // console.log(localStorage.getItem("code"));
-*/
-    
-
-//Ett objekt för ifylld kurs
-const newCourse: courses = {
-    code: codeInput.value,
-    name: nameInput.value,
-    progression: progInput.value,
-    syllabus: linkInput.value,
-}
-
-    
 });
+
+function printCourses(writtenCourse: course):void {
+    //hämtar array från localStorage 
+    let courseArr: course[]= JSON.parse(localStorage.getItem("courses") || "[]");
+    //lägger till objektet för kurs i array
+    courseArr.push(writtenCourse);
+    //konverterar till sträng och sparar i localStorage
+    localStorage.setItem("courses", JSON.stringify(courseArr));
+
+    //loopar igenom arrayen 
+    courseArr.forEach(course =>{
+        console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
+    })
+    console.log(courseArr);
+}

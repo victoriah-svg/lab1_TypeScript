@@ -6,6 +6,11 @@
     row-gap: 30px;
 }
 
+/*Div för felmeddelanden*/
+#error {
+    text-align: center;
+}
+
 #printedCourseSection{
     align-self: center;
     display: grid;
