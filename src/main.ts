@@ -22,7 +22,7 @@ const linkInput = document.getElementById("syllabus") as HTMLInputElement;
 const errorDiv = document.getElementById("error") as HTMLDivElement;
 //Array för felmeddelanden
 let errors: string[];
-
+//Array för kurskoder
 let courseCodeArr: string[] = [];
 
 
@@ -55,11 +55,11 @@ form.addEventListener("submit", (event: SubmitEvent) => {
     //Validerar att kurskoden är unik
     if (courseCodeArr.includes(codeInput.value)) {
         errors.push("* Kurskoden du fyller i måste vara unik");
-    }
+    }else{courseCodeArr.push(codeInput.value);}
     
     
-    else {
-        courseCodeArr.push(codeInput.value);
+    if(errors.length === 0 ) {
+        
         console.log(courseCodeArr);
         //Ett objekt för ifylld kurs
         const newCourse: course = {
@@ -81,7 +81,7 @@ form.addEventListener("submit", (event: SubmitEvent) => {
 });
 
 function printCourses(writtenCourse: course):void {
-    //hämtar array från localStorage 
+   /* //hämtar array från localStorage 
     let courseArr: course[]= JSON.parse(localStorage.getItem("courses") || "[]");
     //lägger till objektet för kurs i array
     courseArr.push(writtenCourse);
@@ -91,9 +91,10 @@ function printCourses(writtenCourse: course):void {
     //loopar igenom arrayen 
     courseArr.forEach(course =>{
         //Skriv ut i DOM här 
-        //checka att kurskod är unik, i första funktionen
         //funktion för att radera kurs
        // console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
     })
-   // console.log(courseArr);
+   // console.log(courseArr);*/
+    console.log("Hej från printcourses");
+   localStorage.setItem(`${writtenCourse.code}`, JSON.stringify(writtenCourse));
 }
