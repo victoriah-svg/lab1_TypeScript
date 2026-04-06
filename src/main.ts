@@ -22,8 +22,9 @@ const linkInput = document.getElementById("syllabus") as HTMLInputElement;
 const errorDiv = document.getElementById("error") as HTMLDivElement;
 //Array för felmeddelanden
 let errors: string[];
-//Array för kurser för localStorage
-let courseArr: object[];
+
+let courseCodeArr: string[] = [];
+
 
 //Händelselyssnare på klick på sumbit formulär
 form.addEventListener("submit", (event: SubmitEvent) => {
@@ -35,23 +36,32 @@ form.addEventListener("submit", (event: SubmitEvent) => {
 
     //Validering för ifyllnad som genererar felmeddelanden om ngt saknas
     if (codeInput.value == "") {
-        errors.push("Du måste fylla i korrekt kod");
+        errors.push("* Du måste fylla i korrekt kod");
     }
 
     if (nameInput.value == "") {
-        errors.push("Du måste fylla i ett kursnamn");
+        errors.push("* Du måste fylla i ett kursnamn");
     }
 
     //Validerar att progression är A, B eller C
     if (progInput.value == "" || (progInput.value !== "A" && progInput.value !== "B" && progInput.value !== "C")) {
-        errors.push("Du måste fylla i A, B eller C som kursprogression");
+        errors.push("* Du måste fylla i A, B eller C som kursprogression");
     }
 
     if (linkInput.value == "") {
-        errors.push("Du måste ange länk till kursplan");
+        errors.push("* Du måste ange länk till kursplan");
     }
 
-    else {//Ett objekt för ifylld kurs
+    //Validerar att kurskoden är unik
+    if (courseCodeArr.includes(codeInput.value)) {
+        errors.push("* Kurskoden du fyller i måste vara unik");
+    }
+    
+    
+    else {
+        courseCodeArr.push(codeInput.value);
+        console.log(courseCodeArr);
+        //Ett objekt för ifylld kurs
         const newCourse: course = {
             code: codeInput.value,
             name: nameInput.value,
@@ -59,6 +69,7 @@ form.addEventListener("submit", (event: SubmitEvent) => {
             syllabus: linkInput.value,
         }
         printCourses(newCourse);
+        
     }
 
     /* Loopar igenom array för felmeddelanden och skriver ut i DOM */
@@ -79,7 +90,10 @@ function printCourses(writtenCourse: course):void {
 
     //loopar igenom arrayen 
     courseArr.forEach(course =>{
-        console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
+        //Skriv ut i DOM här 
+        //checka att kurskod är unik, i första funktionen
+        //funktion för att radera kurs
+       // console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
     })
-    console.log(courseArr);
+   // console.log(courseArr);
 }
