@@ -7,9 +7,10 @@ interface course {
     syllabus: string;
 }
 
-
-// Formulär 
+  // Formulär 
 const form = document.querySelector<HTMLInputElement>("form")!;
+// Tabell
+const tableBody = document.querySelector("tbody")!;
 //Kurkod input
 const codeInput = document.getElementById("courseCode") as HTMLInputElement;
 //Kursnamn input
@@ -24,7 +25,11 @@ const errorDiv = document.getElementById("error") as HTMLDivElement;
 let errors: string[];
 //Array för kurskoder
 let courseCodeArr: string[] = [];
+//Array för tillagda kurser 
+let courseArr: course[] = JSON.parse(localStorage.getItem("courses") || "[]");
 
+document.addEventListener("DOMContentLoaded", () =>{
+printCourses();
 
 //Händelselyssnare på klick på sumbit formulär
 form.addEventListener("submit", (event: SubmitEvent) => {
@@ -55,12 +60,11 @@ form.addEventListener("submit", (event: SubmitEvent) => {
     //Validerar att kurskoden är unik
     if (courseCodeArr.includes(codeInput.value)) {
         errors.push("* Kurskoden du fyller i måste vara unik");
-    }else{courseCodeArr.push(codeInput.value);}
-    
-    
-    if(errors.length === 0 ) {
-        
-        console.log(courseCodeArr);
+    } else { courseCodeArr.push(codeInput.value); }
+
+    //Om array med felmeddelanden är tom, sparar ifyllda uppgifter i objekt och skickar med i anrop funktion printCourses 
+    if (errors.length === 0) {
+
         //Ett objekt för ifylld kurs
         const newCourse: course = {
             code: codeInput.value,
@@ -69,7 +73,7 @@ form.addEventListener("submit", (event: SubmitEvent) => {
             syllabus: linkInput.value,
         }
         printCourses(newCourse);
-        
+
     }
 
     /* Loopar igenom array för felmeddelanden och skriver ut i DOM */
@@ -79,22 +83,55 @@ form.addEventListener("submit", (event: SubmitEvent) => {
     })
 
 });
+})
 
-function printCourses(writtenCourse: course):void {
-   /* //hämtar array från localStorage 
-    let courseArr: course[]= JSON.parse(localStorage.getItem("courses") || "[]");
+
+function printCourses(writtenCourse?: course): void {
+    /*hämtar array från localStorage */
+   // let courseArr: course[] = JSON.parse(localStorage.getItem("courses") || "[]");
     //lägger till objektet för kurs i array
+   if (writtenCourse){
     courseArr.push(writtenCourse);
     //konverterar till sträng och sparar i localStorage
     localStorage.setItem("courses", JSON.stringify(courseArr));
+   } 
+    
 
+    tableBody.innerHTML = "";
     //loopar igenom arrayen 
-    courseArr.forEach(course =>{
+    courseArr.forEach(course => {
         //Skriv ut i DOM här 
+        tableBody.innerHTML +=
+            `<tr id=${course.code}>
+            <td>${course.code}</td>
+            <td>${course.name}</td>
+            <td>${course.syllabus}</td>
+            <td>${course.progression}</td>
+            <td><button id= ${course.code}>Ta bort</button></td>
+          </tr>`;
         //funktion för att radera kurs
-       // console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
+        // console.log("Code: " + course.code, "Name: " + course.name, "progression :" + course.progression);
     })
-   // console.log(courseArr);*/
-    console.log("Hej från printcourses");
-   localStorage.setItem(`${writtenCourse.code}`, JSON.stringify(writtenCourse));
+
+    
+    // console.log(courseArr);*/
+    /*
+     localStorage.setItem(`${writtenCourse.code}`, JSON.stringify(writtenCourse));
+     let storedCourse = localStorage.getItem(`${writtenCourse.code}`);
+  
+     if(storedCourse){
+      let parsedCourse = JSON.parse(storedCourse);
+       tableBody.innerHTML += 
+      `<tr id=${parsedCourse.code}>
+              <td>${parsedCourse.code}</td>
+              <td>${parsedCourse.name}</td>
+              <td>${parsedCourse.syllabus}</td>
+              <td>${parsedCourse.progression}</td>
+              <td><button>Ta bort</button></td>
+            </tr>`; 
+     } */
+
+
+
+
 }
