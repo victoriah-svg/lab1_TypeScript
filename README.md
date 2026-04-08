@@ -7,5 +7,5 @@ Det är en övning för att förstå hur TypeScript skiljer sig från och hur ma
 till JavaScript. Applikationen som skapats ger möjlighet att lägga till och radera kurser som användaren 
 läst på universitetet. Dessa lagras i localStorage och skrivs ut i DOM. 
 
-#### 🌟Länk till [publicerad webbplats]()
+#### 🌟Länk till [publicerad webbplats](https://lab1typescriptvh.netlify.app/)
 
