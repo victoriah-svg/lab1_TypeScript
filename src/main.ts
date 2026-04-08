@@ -107,7 +107,7 @@ function printCourses(writtenCourse?: course): void {
             `<tr id=${course.code}>
             <td>${course.code}</td>
             <td>${course.name}</td>
-            <td><a href=${course.syllabus}>länk</a></td>
+            <td><a href=${course.syllabus} target= "_blank">länk</a></td>
             <td>${course.progression}</td>
             <td><button class="deleteBtn" id= ${course.code}>Ta bort</button></td>
           </tr>`;
