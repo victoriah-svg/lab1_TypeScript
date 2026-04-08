@@ -23,8 +23,7 @@ const linkInput = document.getElementById("syllabus") as HTMLInputElement;
 const errorDiv = document.getElementById("error") as HTMLDivElement;
 //Array för felmeddelanden
 let errors: string[];
-//Array för kurskoder
-let courseCodeArr: string[] = [];
+
 
 //Array för tillagda kurser 
 let courseArr: course[] = JSON.parse(localStorage.getItem("courses") || "[]");
@@ -41,38 +40,40 @@ document.addEventListener("DOMContentLoaded", () => {
         //tömmer div för felmeddelanden mellan varje klick
         errorDiv.innerHTML = "";
 
+        let codeValue = codeInput.value.trim();
+        let nameValue = nameInput.value.trim();
+        let progValue = progInput.value.trim();
+        let linkValue = linkInput.value.trim();
         //Validering för ifyllnad som genererar felmeddelanden om ngt saknas
-        if (codeInput.value == "") {
+        if (codeValue == "") {
             errors.push("* Du måste fylla i korrekt kod");
         }
 
-        if (nameInput.value == "") {
+        if (nameValue == "") {
             errors.push("* Du måste fylla i ett kursnamn");
         }
 
         //Validerar att progression är A, B eller C
-        if (progInput.value == "" || (progInput.value !== "A" && progInput.value !== "B" && progInput.value !== "C")) {
+        if (progValue == "" || (progValue !== "A" && progValue !== "B" && progValue !== "C")) {
             errors.push("* Du måste fylla i A, B eller C som kursprogression");
         }
 
-        if (linkInput.value == "") {
+        if (linkValue == "") {
             errors.push("* Du måste ange länk till kursplan");
-        }
-
-        //Validerar att kurskoden är unik
-        if (courseCodeArr.includes(codeInput.value)) {
+        } else if (courseArr.some(course => course.code === codeValue)) {
+            //Validerar att kurskoden är unik - om kurskod finns i array pusha felmeddelande
             errors.push("* Kurskoden du fyller i måste vara unik");
-        } else { courseCodeArr.push(codeInput.value); console.log(courseCodeArr);}
+        } 
 
         //Om array med felmeddelanden är tom, sparar ifyllda uppgifter i objekt och skickar med i anrop funktion printCourses 
         if (errors.length === 0) {
 
             //Ett objekt för ifylld kurs
             const newCourse: course = {
-                code: codeInput.value,
-                name: nameInput.value,
-                progression: progInput.value,
-                syllabus: linkInput.value,
+                code: codeValue,
+                name: nameValue,
+                progression: progValue,
+                syllabus: linkValue,
             }
             printCourses(newCourse);
 
@@ -137,4 +138,5 @@ function deleteCourses(buttonid: string): void {
     localStorage.setItem("courses", JSON.stringify(courseArr));
     //anropar funktion utan argument (då läggs kurser i arrayen till i DOM)
     printCourses();
+   
 }
