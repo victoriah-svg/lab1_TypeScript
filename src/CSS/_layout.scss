@@ -11,14 +11,14 @@
     text-align: center;
 }
 
-#printedCourseSection{
+#printedCourseSection {
     align-self: center;
     display: grid;
     justify-items: center;
     width: 90%;
 }
 
-#addNewCourseSection{
+#addNewCourseSection {
     display: grid;
     justify-items: center;
     align-self: start;
@@ -34,10 +34,10 @@ form {
     display: grid;
     gap: 10px;
     width: 90%;
-   justify-items: center;
+    justify-items: center;
 }
 
-input:not(#submitBtn){
+input:not(#submitBtn) {
     width: 90%;
     height: 30px;
     border-radius: 5px;
@@ -60,31 +60,33 @@ input:not(#submitBtn){
 
 /*--Mobil-läge--*/
 @media screen and (max-width: 600px) {
-    body{
+    body {
         font-size: 0.9rem;
     }
 
-    h1:not(#logo){
+    h1:not(#logo) {
         font-size: 1rem;
     }
 
-    h2{
+    h2 {
         font-size: 0.9rem;
     }
 
-    form{
+    form {
         width: 100%;
         padding: 0;
-        
+
     }
 
-    table{
-         padding: 0;
+    table {
+        padding: 0;
         width: 100%;
         font-size: 12px;
     }
 
-    #printedCourseSection{
+    #printedCourseSection {
         width: 100%;
     }
+
+   
 }
