@@ -25,6 +25,7 @@ const errorDiv = document.getElementById("error") as HTMLDivElement;
 let errors: string[];
 //Array för kurskoder
 let courseCodeArr: string[] = [];
+
 //Array för tillagda kurser 
 let courseArr: course[] = JSON.parse(localStorage.getItem("courses") || "[]");
 
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //Validerar att kurskoden är unik
         if (courseCodeArr.includes(codeInput.value)) {
             errors.push("* Kurskoden du fyller i måste vara unik");
-        } else { courseCodeArr.push(codeInput.value); }
+        } else { courseCodeArr.push(codeInput.value); console.log(courseCodeArr);}
 
         //Om array med felmeddelanden är tom, sparar ifyllda uppgifter i objekt och skickar med i anrop funktion printCourses 
         if (errors.length === 0) {
@@ -88,20 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function printCourses(writtenCourse?: course): void {
-    /*hämtar array från localStorage */
-    // let courseArr: course[] = JSON.parse(localStorage.getItem("courses") || "[]");
-    //lägger till objektet för kurs i array
+    
+    //lägger till objektet för kurs i array om objektet skickats med som argument
     if (writtenCourse) {
         courseArr.push(writtenCourse);
-        //konverterar till sträng och sparar i localStorage
+        //konverterar till JSON sträng och sparar i localStorage
         localStorage.setItem("courses", JSON.stringify(courseArr));
     }
 
-
+    //Tömmer tabellen 
     tableBody.innerHTML = "";
     //loopar igenom arrayen 
     courseArr.forEach(course => {
-        //Skriv ut i DOM här 
+        //Skriver ut kurs i DOM 
         tableBody.innerHTML +=
             `<tr id=${course.code}>
             <td>${course.code}</td>
@@ -114,13 +114,12 @@ function printCourses(writtenCourse?: course): void {
     })
 
     //deleteknappar
-    
     const deleteBtn = document.querySelectorAll(".deleteBtn");
 
     if (deleteBtn !== null) {
         deleteBtn.forEach(button => {
             button.addEventListener("click", ()=>{
-                deleteCourses(button.id);
+                deleteCourses(button.id, );
             }); 
 
         });
@@ -130,4 +129,12 @@ function printCourses(writtenCourse?: course): void {
 
 function deleteCourses(buttonid: string): void {
     console.log("kurser raderas för knapp " + buttonid);
+    // En array med endast de kurser som inte ska tas bort
+    const newCourseArr = courseArr.filter(course => course.code !== buttonid);
+    //sätter värdet på arrayen som gör getItem till den nya arrayen
+    courseArr = newCourseArr;
+    //sätter det nya värdet i localStorage
+    localStorage.setItem("courses", JSON.stringify(courseArr));
+    //anropar funktion utan argument (då läggs kurser i arrayen till i DOM)
+    printCourses();
 }
